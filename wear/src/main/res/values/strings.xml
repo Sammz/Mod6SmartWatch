@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Mod6Good</string>
+    <string name="hello_round">Hello Round World!</string>
+    <string name="hello_square">Hello Square World!</string>
+    <string name="title_activity_options">Options</string>
+    <string name="button">Button</string>
+    <string name="options">Options</string>
+    <string name="back">Back</string>
+
+</resources>
