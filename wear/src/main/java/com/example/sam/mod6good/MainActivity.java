@@ -33,10 +33,10 @@ public class MainActivity extends Activity implements View.OnClickListener, Sens
         button2.setOnClickListener(this);
         mTextViewHeart = (TextView) findViewById(R.id.heart);
         SensorManager mSensorManager = ((SensorManager)getSystemService(SENSOR_SERVICE));
-        Sensor mHeartRateSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE);
+        Sensor mHeartRateSensor = mSensorManager.getDefaultSensor(21);
         mSensorManager.registerListener(this, mHeartRateSensor, SensorManager.SENSOR_DELAY_NORMAL);
         Log.i(TAG, "LISTENER REGISTERED.");
-        mTextViewHeart.setText("Something here");
+        mTextViewHeart.setText("Stressmeter");
 
         for (Sensor sensor : mSensorManager.getSensorList(Sensor.TYPE_ALL)) {
             Log.e("HB Service", sensor.getName() + ": " + sensor.getType());

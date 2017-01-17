@@ -6,5 +6,6 @@
     <string name="button">Button</string>
     <string name="options">Options</string>
     <string name="back">Back</string>
+    <string name="autoplay">Autoplay</string>
 
 </resources>
