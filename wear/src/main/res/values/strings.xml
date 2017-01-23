@@ -6,6 +6,8 @@
     <string name="button">Button</string>
     <string name="options">Options</string>
     <string name="back">Back</string>
-    <string name="autoplay">Autoplay</string>
+    <string name="popup">Popups</string>
+    <string name="title_activity_stress_popup">StressPopup</string>
+    <string name="Stresspopup">I measure stress.\nDo you want to play music?</string>
 
 </resources>

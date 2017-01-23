@@ -23,6 +23,7 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
     private TextView mTextViewHeart;
     Button button2;
     private long currentTime;
+    private int averageHR;
 
 // adb -e logcat MainActivity:i *:S > mod6log.txt
 
