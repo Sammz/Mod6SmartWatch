@@ -3,25 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.sam.mod6good.Options"
+    tools:context="com.example.sam.mod6good.MusicActivity"
     tools:deviceIds="wear_round">
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/music_text"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:fontFamily="sans-serif" />
 
     <Button
         android:text="@string/back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ButtonBack"
+        android:id="@+id/musicBackButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp" />
-
-    <CheckBox
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignEnd="@+id/ButtonBack"
-        android:layout_marginTop="42dp"
-        android:id="@+id/checkBoxAutoPlay"
-        android:text="@string/autoplay" />
+        android:layout_marginBottom="22dp" />
 </RelativeLayout>

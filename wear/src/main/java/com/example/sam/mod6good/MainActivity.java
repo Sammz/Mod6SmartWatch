@@ -1,6 +1,8 @@
 package com.example.sam.mod6good;
 
-
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -13,42 +15,52 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-
-
-
 public class MainActivity extends WearableActivity implements View.OnClickListener, SensorEventListener {
 
-
-    private static final String TAG = "MainActivity";
+    public static final String TAG = "MainActivity";
     private TextView mTextViewHeart;
-    Button button2;
+    private Button button2;
     private long currentTime;
-    private int averageHR;
+    public  AlertDialog.Builder builder ;
+    public  int stress = 0;
+    private SensorManager mSensorManager;
+    private Sensor mHeartRateSensor;
 
 // adb -e logcat MainActivity:i *:S > mod6log.txt
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setAmbientEnabled();
-
         setContentView(R.layout.round_activity_main);
-
         button2 = (Button) findViewById(R.id.ButtonOptions);
         button2.setOnClickListener(this);
         mTextViewHeart = (TextView) findViewById(R.id.heart);
-        SensorManager mSensorManager = ((SensorManager)getSystemService(SENSOR_SERVICE));
-        Sensor mHeartRateSensor = mSensorManager.getDefaultSensor(21);
-        mSensorManager.registerListener(this, mHeartRateSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager = ((SensorManager)getSystemService(SENSOR_SERVICE));
+        mHeartRateSensor = mSensorManager.getDefaultSensor(21);
         Log.i("", "LISTENER REGISTERED.");
         mTextViewHeart.setText("Stressmeter");
-
         currentTime = System.currentTimeMillis();
         Log.d("timestamp: ", ""+(currentTime/1000000));
        mSensorManager.registerListener(this, mHeartRateSensor, SensorManager.SENSOR_DELAY_FASTEST);
+
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        startActivity(new Intent("com.example.sam.mod6good.MusicActivity"));
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        dialog.cancel();
+                        break;
+                }
+            }
+        };
+
+      builder = new AlertDialog.Builder(mTextViewHeart.getContext());
+        builder.setTitle("I measure stress\nListen to music?").setPositiveButton("Yes", dialogClickListener)
+                .setNegativeButton("No", dialogClickListener);
     }
 
     @Override
@@ -67,11 +79,22 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_HEART_RATE) {
+            int hr = (int)event.values[0];
             String msg = "" + (int)event.values[0] + " ";
             mTextViewHeart.setText(msg);
-            String time = "" + (System.currentTimeMillis() - currentTime)/1000;
+            String time = "" + System.currentTimeMillis();
             Log.i(TAG, msg + " " + time);
+            if(hr>70){
+                stress+= 1;
+            }
+            if(hr>100){
+                stress += 2;
+            }
+            if (stress > 10) {
 
+                builder.show();
+                stress = 0;
+            }
         }
         else
             Log.d(TAG, "Unknown sensor type");
@@ -82,7 +105,18 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
         Log.d(TAG, "onAccuracyChanged - accuracy: " + accuracy);
     }
 
-    public void onResume(){
+    protected void onResume() {
         super.onResume();
+        mSensorManager.registerListener(this, mHeartRateSensor, SensorManager.SENSOR_DELAY_FASTEST);
+
+
     }
+
+    protected void onPause() {
+        super.onPause();
+        mSensorManager.unregisterListener(this, mHeartRateSensor);
+
+
+    }
+
 }

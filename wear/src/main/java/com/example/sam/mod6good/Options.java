@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-
 public class Options extends Activity implements View.OnClickListener {
 
     Button buttonBack;
@@ -15,14 +14,13 @@ public class Options extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.round_activity_options);
 
-
         buttonBack = (Button) findViewById(R.id.ButtonBack);
         buttonBack.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.ButtonBack:
                 buttonBackClick();
                 break;
@@ -31,6 +29,5 @@ public class Options extends Activity implements View.OnClickListener {
 
     private void buttonBackClick() {
         this.finish();
-
     }
 }

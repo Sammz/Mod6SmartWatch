@@ -5,7 +5,7 @@
     android:id="@+id/watch_view_stub"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:rectLayout="@layout/rect_activity_stress_popup"
-    app:roundLayout="@layout/round_activity_stress_popup"
-    tools:context="com.example.sam.mod6good.StressPopup"
+    app:rectLayout="@layout/rect_activity_music"
+    app:roundLayout="@layout/round_activity_music"
+    tools:context="com.example.sam.mod6good.MusicActivity"
     tools:deviceIds="wear"></android.support.wearable.view.WatchViewStub>
